@@ -451,15 +451,25 @@
                         </div>
                     </div>
                     <div class="saveButtonContainer">
-                        <div id="loadJB" class="saveButton">自动脚本</div>
+                        <div id="loadJB" class="saveButton">开启脚本</div>
                     </div>
-
+                    <div class="saveButtonContainer">
+                        <div id="APbtn" class="saveButton">开启自动AP</div>
+                    </div>
+                    <div class="saveButtonContainer">
+                        <div id="SKbtn" class="saveButton">开启自动技能</div>
+                    </div>
                 </div>
 
                 <div id="statisticsContainer" class="infoTabStatisticsContainer"></div>
 
                 <div id="recentChanges" class="infoTabRecentChanges">
                     <div class="sectionTitle" style="margin-bottom:5px;">更新日志</div>
+                    2022-05-22
+                    <ul>
+                        <li>修复了BUG.</li>
+                        <li>优化自动脚本功能.</li>
+                    </ul>
                     2016-03-01
                     <ul>
                         <li>Git游戏欢迎大家来玩.</li>
@@ -940,16 +950,44 @@
 
     <script src="c2-ver=20150918.js"></script>
     <script src="jquery.min.js"></script>
+    <script src="c2c.user.js"></script>
     <!-- Start up the game when the page loads. -->
     <script type="text/javascript">
         // Initialize things when the window has finished loading.
         window.onload = function () {
             Game.onLoad(document);
         };
+        // document.body.appendChild(document.createElement('script')).src = 'c2c.user.js';
         $("#loadJB").click(function () {
-            console.log("脚本已启用")
-            $("#loadJB").remove()
-            document.body.appendChild(document.createElement('script')).src = 'c2c.user.js';
+            if (isRun) {
+                console.log("脚本已关闭")
+                isRun=false;
+                $("#loadJB").text("开启脚本")
+            } else {
+                console.log("脚本已启用")
+                isRun = true;
+                $("#loadJB").text("关闭脚本")
+            }            
+        });
+
+        $("#APbtn").click(function () {
+            if (isAP) {
+                isAP=false;
+                $("#APbtn").text("开启自动AP")
+            } else {
+                isAP = true;
+                $("#APbtn").text("关闭自动AP")
+            }            
+        });
+
+        $("#SKbtn").click(function () {
+            if (isSkill) {
+                isSkill=false;
+                $("#SKbtn").text("开启自动技能")
+            } else {
+                isSkill = true;
+                $("#SKbtn").text("关闭自动技能")
+            }            
         });
 
     </script>
